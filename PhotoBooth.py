@@ -28,7 +28,7 @@ class PhotoBoothApp:
         self.base = QWidget()
         self.grid = QGridLayout()
         self.picam2 = Picamera2()
-        self.picam2.configure(picam2.create_preview_configuration())
+        self.picam2.configure(self.picam2.create_preview_configuration())
 
         self.base.setLayout(self.grid)
         self.build_ui()
