@@ -31,7 +31,8 @@ class PhotoBooth:
 
     def capture_done(self):
         self.picam2.wait()
-        self.button = QPushButton("Click to capture")
+        #self.button = QPushButton("Click to capture")
+        print('done')
         self.button.setEnabled(True)
 
     def capture(self):
