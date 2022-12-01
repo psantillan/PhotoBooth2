@@ -19,7 +19,7 @@ class PhotoBooth:
 
 
         self.layout = QVBoxLayout()
-        self.button = QPushButton("Click to capture JPEG")
+        self.button = QPushButton("Click to capture")
         self.button.clicked.connect(self.capture)
         self.setup_ui()
         window.setLayout(self.layout)
@@ -31,10 +31,12 @@ class PhotoBooth:
 
     def capture_done(self):
         self.picam2.wait()
+        self.button = QPushButton("Click to capture")
         self.button.setEnabled(True)
 
     def capture(self):
         self.button.setEnabled(False)
+        self.button.setText('Capturing....')
         self.picam2.switch_mode_and_capture_file(self.config['still'], 'test.jpg', signal_function=self.qpicamera2.signal_done)
 
 
