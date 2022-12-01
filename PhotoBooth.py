@@ -35,7 +35,7 @@ class PhotoBooth:
 
     def capture(self):
         self.button.setEnabled(False)
-        self.picam2.switch_mode_and_capture_file(self.config['still'], 'test.jpg', signal_funtion=self.qpicamera2.signal_done)
+        self.picam2.switch_mode_and_capture_file(self.config['still'], 'test.jpg', signal_function=self.qpicamera2.signal_done)
 
 
 if __name__ == "__main__":
