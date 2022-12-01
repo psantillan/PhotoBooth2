@@ -13,7 +13,7 @@ class PhotoBooth:
             'still': self.picam2.create_still_configuration()
         }
         self.picam2.configure(self.config['preview'])
-        self.qpicamera2 = QGlPicamera2(self.picam2, width=800, keep_ar=True)
+        self.qpicamera2 = QGlPicamera2(self.picam2, width=800, height=600, keep_ar=True)
         self.picam2.start()
 
         self.centralwidget = QtWidgets.QWidget(window)
