@@ -6,14 +6,14 @@ from picamera2 import Picamera2
 
 class PhotoBooth:
     def __init__(self, window):
-        window.resize(600,800)
+        window.resize(800, 600)
         self.picam2 = Picamera2()
         self.config = {
             'preview': self.picam2.create_preview_configuration(),
             'still': self.picam2.create_still_configuration()
         }
         self.picam2.configure(self.config['preview'])
-        self.qpicamera2 = QGlPicamera2(self.picam2, width=800, height=600, keep_ar=True)
+        self.qpicamera2 = QGlPicamera2(self.picam2, width=1280, keep_ar=True)
         self.picam2.start()
 
 
