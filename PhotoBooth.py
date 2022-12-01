@@ -25,7 +25,7 @@ class PhotoBooth:
         window.setLayout(self.layout)
 
     def setup_ui(self):
-
+        self.button.setGeometry(200, 150, 100, 40)
         self.layout.addWidget(self.qpicamera2)
         self.layout.addWidget(self.button)
 
