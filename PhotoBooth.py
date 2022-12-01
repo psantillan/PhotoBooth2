@@ -6,6 +6,7 @@ from picamera2 import Picamera2
 
 class PhotoBooth:
     def __init__(self, window):
+        window.resize(800, 600)
         self.picam2 = Picamera2()
         self.config = {
             'preview': self.picam2.create_preview_configuration(),
@@ -14,9 +15,11 @@ class PhotoBooth:
         self.picam2.configure(self.config['preview'])
         self.qpicamera2 = QGlPicamera2(self.picam2, width=800, keep_ar=True)
         self.picam2.start()
+
+        self.centralwidget = QtWidgets.QWidget(window)
         self.layout = QVBoxLayout()
         self.setup_ui()
-        window.setLayout(self.layout)
+        self.centralwidget.setLayout(self.layout)
 
     def setup_ui(self):
         self.layout.addWidget(self.qpicamera2)
@@ -24,7 +27,7 @@ class PhotoBooth:
 
 if __name__ == "__main__":
     app = QApplication([])
-    MainWindow = QWidget()
+    MainWindow = QtWidgets.QMainWindow()
     pb = PhotoBooth(MainWindow)
     MainWindow.show()
     app.exec()
