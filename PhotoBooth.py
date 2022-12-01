@@ -6,6 +6,7 @@ from picamera2 import Picamera2
 
 class PhotoBooth:
     def __init__(self, window):
+        window.resize(600,800)
         self.picam2 = Picamera2()
         self.config = {
             'preview': self.picam2.create_preview_configuration(),
