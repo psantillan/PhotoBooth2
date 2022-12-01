@@ -30,8 +30,8 @@ class PhotoBooth:
         self.layout.addWidget(self.button)
 
     def capture_done(self):
-        self.picam2.wait()
-        print('done')
+        x = self.picam2.wait()
+        print(x)
         self.button.setEnabled(True)
         self.button.setText("Click to capture")
 
