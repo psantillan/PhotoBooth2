@@ -6,7 +6,6 @@ from picamera2 import Picamera2
 
 class PhotoBooth:
     def __init__(self, window):
-        self.mainWindow = QtWidgets.QMainWindow()
         self.picam2 = Picamera2()
         self.config = {
             'preview': self.picam2.create_preview_configuration(),
@@ -25,7 +24,7 @@ class PhotoBooth:
 
 if __name__ == "__main__":
     app = QApplication([])
-    MainWindow = QtWidgets.QMainWindow()
+    MainWindow = QWidget()
     pb = PhotoBooth(MainWindow)
     MainWindow.show()
-    app.exec_()
+    app.exec()
