@@ -14,18 +14,28 @@ class PhotoBooth:
         }
         self.picam2.configure(self.config['preview'])
         self.qpicamera2 = QGlPicamera2(self.picam2, width=1280, keep_ar=True)
+        self.qpicamera2.done_signal.connect(self.capture_done)
         self.picam2.start()
 
 
         self.layout = QVBoxLayout()
+        self.button = QPushButton("Click to capture JPEG")
+        self.button.clicked.connect(self.capture)
         self.setup_ui()
         window.setLayout(self.layout)
 
     def setup_ui(self):
-        button = QPushButton("Click to capture JPEG")
-        self.layout.addWidget(self.qpicamera2)
-        self.layout.addWidget(button)
 
+        self.layout.addWidget(self.qpicamera2)
+        self.layout.addWidget(self.button)
+
+    def capture_done(self):
+        self.picam2.wait()
+        self.button.setEnabled(True)
+
+    def capture(self):
+        self.button.setEnabled(False)
+        self.picam2.switch_mode_and_capture_file(self.config['still'], 'test.jpg', signal_funtion=self.qpicamera2.signal_done)
 
 
 if __name__ == "__main__":
