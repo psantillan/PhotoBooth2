@@ -22,16 +22,27 @@ class Camera:
     def capture(self, *args, **kwargs):
         return self.camera.capture_buffer(*args, **kwargs)
 
+    def wait(self, job):
+        return self.camera.wait(job)
+
 class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
         pygame.init()
         self.camera = camera
         self.size = (1600, 2560) if 'window_size' not in kwargs else kwargs['window_size']
         self.window = pygame.display.set_mode(self.size, pygame.NOFRAME)
+        self.current_image = None
+
+    def capture_complete(self, job):
+        self.current_image = self.camera.wait(job)
+        print('captured')
+
 
     def run(self):
         running = True
+        # set current image to None will be updated by picamera complete function
         while running:
+            cam_data = self.camera.capture(False, signal_function=self.capture_complete)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -40,7 +51,7 @@ class PhotoBooth:
                         pygame.quit()
                         sys.exit()
 
-            cam_data = self.camera.capture()
+
             raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             #cam_surface = pygame.transform.scale(raw_surface, (1440, 1080))
             cam_surface = pygame.transform.scale2x(raw_surface)
@@ -55,7 +66,7 @@ class PhotoBooth:
                 25,
                 1280+50,
                 960+50
-            ], 0, 10)
+            ], 0, 20)
 
             # Drawing button Rectangle
             pygame.draw.rect(self.window, btn_color, [
@@ -64,7 +75,8 @@ class PhotoBooth:
                 800,
                 400
             ], 0, 5)
-            self.window.blit(cam_surface, (int(self.size[0]/2) - 640, 50))
+            if self.current_image:
+                self.window.blit(cam_surface, (int(self.size[0]/2) - 640, 50))
             pygame.display.update()
         pygame.quit()
 
