@@ -57,10 +57,10 @@ class PhotoBooth:
 
             # Drawing button Rectangle
             pygame.draw.rect(self.window, color, [
-                int(self.size[0]/2),
-                int(self.size[1]/2),
-                400,
-                200
+                int(self.size[0]/2) - 400,
+                int(self.size[1]/2) + 200,
+                800,
+                400
             ], 0, 5)
             self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), 50))
             pygame.display.update()
