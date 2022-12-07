@@ -58,7 +58,7 @@ class PhotoBooth:
             # Drawing button Rectangle
             pygame.draw.rect(self.window, color, [
                 int(self.size[0]/2),
-                int(self.size[1]/4),
+                int(self.size[1]/2),
                 400,
                 200
             ], 0, 5)
