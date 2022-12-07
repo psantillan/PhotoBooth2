@@ -53,7 +53,7 @@ class PhotoBooth:
                 10,
                 self.camera.size[0]+30,
                 self.camera.size[1]+30
-            ], 2,  border_bottom_right_radius=5)
+            ], 0, 5)
             self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), 20))
             pygame.display.update()
         pygame.quit()
