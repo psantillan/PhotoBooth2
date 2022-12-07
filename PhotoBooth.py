@@ -1,6 +1,8 @@
 import pygame
 from picamera2 import Picamera2
 import sys
+import os
+
 
 class Camera:
     def __init__(self, *args, **kwargs):
@@ -26,7 +28,7 @@ class PhotoBooth:
         pygame.init()
         self.camera = camera
         self.size = None if 'window_size' not in kwargs else kwargs['window_size']
-        self.window = pygame.display.set_mode((800,600), pygame.FULLSCREEN)
+        self.window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
     def run(self):
         running = True
@@ -47,5 +49,6 @@ class PhotoBooth:
 
 
 if __name__ == "__main__":
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
     pb = PhotoBooth(Camera())
     pb.run()
