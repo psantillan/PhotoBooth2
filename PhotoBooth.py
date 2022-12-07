@@ -7,7 +7,7 @@ class Camera:
     def __init__(self, *args, **kwargs):
         # initialize picamera2
         self.camera = Picamera2()
-        self.size = (1024, 768) if 'size' not in kwargs else kwargs['size']
+        self.size = (1600, 1200) if 'size' not in kwargs else kwargs['size']
         # create sensor configs
         self.mode = {
 
