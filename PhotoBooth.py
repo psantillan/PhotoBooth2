@@ -24,17 +24,24 @@ class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
         pygame.init()
         self.camera = camera
-        self.size = (640, 480) if 'window_size' not in kwargs else kwargs['window_size']
-        self.window = pygame.display.set_mode(self.size)
+        self.size = None if 'window_size' not in kwargs else kwargs['window_size']
+        self.window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
     def run(self):
         running = True
         while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                    if event.key == K_ESCAPE:
+                        running = False
             self.window.fill((255, 255, 255))
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             self.window.blit(cam_surface, (0, 0))
             pygame.display.update()
+        pygame.quit()
 
 
 if __name__ == "__main__":
