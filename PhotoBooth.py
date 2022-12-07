@@ -34,7 +34,9 @@ class PhotoBooth:
         self.current_image = None
 
     def capture_complete(self, job):
-        self.current_image = self.camera.wait(job)
+        result = self.camera.wait(job)
+        capture = pygame.image.frombuffer(result, self.camera.size, 'RGBA')
+        self.current_image = pygame.transform.scale2x(capture)
         print('captured')
 
 
