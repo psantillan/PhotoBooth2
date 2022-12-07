@@ -25,7 +25,7 @@ class PhotoBooth:
         pygame.init()
         self.camera = camera
         self.size = None if 'window_size' not in kwargs else kwargs['window_size']
-        self.window = pygame.display.set_mode(self.camera.size, pygame.FULLSCREEN)
+        self.window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
     def run(self):
         running = True
