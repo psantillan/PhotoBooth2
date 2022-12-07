@@ -44,7 +44,7 @@ class PhotoBooth:
         running = True
         # set current image to None will be updated by picamera complete function
         while running:
-            cam_data = self.camera.capture(False, signal_function=self.capture_complete)
+            cam_data = self.camera.capture(wait=False, signal_function=self.capture_complete)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
