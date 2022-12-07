@@ -43,9 +43,9 @@ class PhotoBooth:
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
 
-            self.window.fill((255, 255, 255))
+            self.window.fill((176, 168, 185))
             # Initializing Color
-            color = (0, 0, 0)
+            color = (75, 68, 83)
 
             # Drawing Rectangle
             pygame.draw.rect(self.window, color, [
