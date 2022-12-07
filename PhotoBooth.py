@@ -1,5 +1,6 @@
 import pygame
 from picamera2 import Picamera2
+import sys
 
 class Camera:
     def __init__(self, *args, **kwargs):
@@ -25,7 +26,7 @@ class PhotoBooth:
         pygame.init()
         self.camera = camera
         self.size = None if 'window_size' not in kwargs else kwargs['window_size']
-        self.window = pygame.display.set_mode((1080,1920), pygame.FULLSCREEN)
+        self.window = pygame.display.set_mode((800,600), pygame.FULLSCREEN)
 
     def run(self):
         running = True
@@ -36,6 +37,7 @@ class PhotoBooth:
                 if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
+                        sys.exit()
             self.window.fill((255, 255, 255))
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
