@@ -39,10 +39,17 @@ class PhotoBooth:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         sys.exit()
-            self.window.fill((255, 255, 255))
+
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
-            self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), int(self.size[1]*0.05)))
+
+            self.window.fill((255, 255, 255))
+            # Initializing Color
+            color = (0, 0, 0)
+            # Drawing Rectangle
+            pygame.draw.rect(self.window, color, pygame.Rect(
+                int(self.size[0]/2) - (self.camera.size[0]+10), 30, self.camera.size[0]+10, self.camera.size[1]+10), 2, border_bottom_right_radius=5)
+            self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), 20))
             pygame.display.update()
         pygame.quit()
 
