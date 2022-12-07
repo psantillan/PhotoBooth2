@@ -50,7 +50,7 @@ class PhotoBooth:
 
             # Drawing BG Rectangle
             pygame.draw.rect(self.window, color, [
-                int(self.size[0]/2) - int((self.camera.size[0]+50)/2),
+                int(self.size[0]/2) - int((1440+50)/2),
                 25,
                 1440+50,
                 1080+50
