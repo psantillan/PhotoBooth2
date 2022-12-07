@@ -17,13 +17,6 @@ class Camera:
         # start camera
         self.camera.start()
 
-    def __getattr__(self, attr):
-        try:
-            return getattr(self, attr)
-        except Exception as e:
-            print(e)
-            return getattr(self.camera, attr)
-
 
 class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
@@ -36,7 +29,7 @@ class PhotoBooth:
         running = True
         while running:
             self.window.fill((255, 255, 255))
-            cam_data = self.camera.capture_buffer()
+            cam_data = self.camera.camera.capture_buffer()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             self.window.blit(cam_surface, (0, 0))
             pygame.display.update()
