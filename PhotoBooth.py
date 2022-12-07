@@ -43,7 +43,7 @@ class PhotoBooth:
             self.window.fill((255, 255, 255))
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
-            self.window.blit(cam_surface, (0, 0))
+            self.window.blit(cam_surface, (100, 0))
             pygame.display.update()
         pygame.quit()
 
