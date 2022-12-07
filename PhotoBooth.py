@@ -7,7 +7,7 @@ class Camera:
     def __init__(self, *args, **kwargs):
         # initialize picamera2
         self.camera = Picamera2()
-        self.size = (1440, 1080) if 'size' not in kwargs else kwargs['size']
+        self.size = (800, 600) if 'size' not in kwargs else kwargs['size']
         # create sensor configs
         self.mode = {
 
@@ -41,8 +41,8 @@ class PhotoBooth:
                         sys.exit()
 
             cam_data = self.camera.capture()
-            cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
-
+            raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
+            cam_surface = pygame.transform.flip(pygame.transform.scale(raw_surface, (1440, 1080)), True, False)
             self.window.fill((176, 168, 185))
             # Initializing Color
             color = (75, 68, 83)
@@ -63,7 +63,7 @@ class PhotoBooth:
                 800,
                 400
             ], 0, 5)
-            self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), 50))
+            self.window.blit(cam_surface, (int(self.size[0]/2) - 720, 50))
             pygame.display.update()
         pygame.quit()
 
