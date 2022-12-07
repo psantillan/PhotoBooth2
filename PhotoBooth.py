@@ -28,7 +28,7 @@ class PhotoBooth:
         pygame.init()
         self.camera = camera
         self.size = None if 'window_size' not in kwargs else kwargs['window_size']
-        self.window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.window = pygame.display.set_mode((1080,1920), pygame.NOFRAME)
 
     def run(self):
         running = True
@@ -43,7 +43,7 @@ class PhotoBooth:
             self.window.fill((255, 255, 255))
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
-            self.window.blit(cam_surface, (0, 0))
+            #self.window.blit(cam_surface, (0, 0))
             pygame.display.update()
         pygame.quit()
 
