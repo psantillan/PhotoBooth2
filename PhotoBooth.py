@@ -17,6 +17,8 @@ class Camera:
         # start camera
         self.camera.start()
 
+    def capture(self, *args, **kwargs):
+        return self.camera.capture_buffer(*args, **kwargs)
 
 class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
@@ -29,7 +31,7 @@ class PhotoBooth:
         running = True
         while running:
             self.window.fill((255, 255, 255))
-            cam_data = self.camera.camera.capture_buffer()
+            cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             self.window.blit(cam_surface, (0, 0))
             pygame.display.update()
