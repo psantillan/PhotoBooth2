@@ -47,12 +47,20 @@ class PhotoBooth:
             # Initializing Color
             color = (75, 68, 83)
 
-            # Drawing Rectangle
+            # Drawing BG Rectangle
             pygame.draw.rect(self.window, color, [
                 int(self.size[0]/2) - int((self.camera.size[0]+50)/2),
                 25,
                 self.camera.size[0]+50,
                 self.camera.size[1]+50
+            ], 0, 10)
+
+            # Drawing button Rectangle
+            pygame.draw.rect(self.window, color, [
+                int(self.size[0]/2),
+                int(self.size[0]/4),
+                400,
+                200
             ], 0, 5)
             self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), 50))
             pygame.display.update()
