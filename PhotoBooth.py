@@ -46,6 +46,7 @@ class PhotoBooth:
             self.window.fill((176, 168, 185))
             # Initializing Color
             color = (75, 68, 83)
+            btn_color = (255, 128, 102)
 
             # Drawing BG Rectangle
             pygame.draw.rect(self.window, color, [
@@ -56,9 +57,9 @@ class PhotoBooth:
             ], 0, 10)
 
             # Drawing button Rectangle
-            pygame.draw.rect(self.window, color, [
+            pygame.draw.rect(self.window, btn_color, [
                 int(self.size[0]/2) - 400,
-                int(self.size[1]/2) + 200,
+                int(self.size[1]/2) + 800,
                 800,
                 400
             ], 0, 5)
