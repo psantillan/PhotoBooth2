@@ -1,7 +1,6 @@
 import pygame
 from picamera2 import Picamera2
 import sys
-import os
 
 
 class Camera:
@@ -43,12 +42,11 @@ class PhotoBooth:
             self.window.fill((255, 255, 255))
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
-            self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), 0))
+            self.window.blit(cam_surface, (int(self.size[0]/2) - int(self.camera.size[0]/2), int(self.size[1]*0.1)))
             pygame.display.update()
         pygame.quit()
 
 
 if __name__ == "__main__":
-    os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
     pb = PhotoBooth(Camera())
     pb.run()
