@@ -33,18 +33,17 @@ class PhotoBooth:
         self.window = pygame.display.set_mode(self.size, pygame.NOFRAME)
         self.current_image = None
 
-    def capture_complete(self, job):
+    def preview_capture_complete(self, job):
         result = self.camera.wait(job)
         capture = pygame.image.frombuffer(result, self.camera.size, 'RGBA')
         self.current_image = pygame.transform.scale2x(capture)
-        print('captured')
 
 
     def run(self):
         running = True
         # set current image to None will be updated by picamera complete function
         while running:
-            cam_data = self.camera.capture(wait=False, signal_function=self.capture_complete)
+            cam_data = self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
