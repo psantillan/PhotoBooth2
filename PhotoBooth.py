@@ -43,7 +43,7 @@ class PhotoBooth:
             cam_data = self.camera.capture()
             raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             cam_surface = pygame.transform.flip(pygame.transform.scale(raw_surface, (1440, 1080)), True, False)
-            self.window.fill((176, 168, 185))
+            self.window.fill((10, 10, 10))
             # Initializing Color
             color = (75, 68, 83)
             btn_color = (255, 128, 102)
@@ -52,8 +52,8 @@ class PhotoBooth:
             pygame.draw.rect(self.window, color, [
                 int(self.size[0]/2) - int((self.camera.size[0]+50)/2),
                 25,
-                self.camera.size[0]+50,
-                self.camera.size[1]+50
+                1440+50,
+                1080+50
             ], 0, 10)
 
             # Drawing button Rectangle
