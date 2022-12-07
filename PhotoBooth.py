@@ -54,9 +54,9 @@ class PhotoBooth:
                         sys.exit()
 
 
-            raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
+            #raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             #cam_surface = pygame.transform.scale(raw_surface, (1440, 1080))
-            cam_surface = pygame.transform.scale2x(raw_surface)
+            #cam_surface = pygame.transform.scale2x(raw_surface)
             self.window.fill((10, 10, 10))
             # Initializing Color
             color = (75, 68, 83)
@@ -78,7 +78,7 @@ class PhotoBooth:
                 400
             ], 0, 5)
             if self.current_image:
-                self.window.blit(cam_surface, (int(self.size[0]/2) - 640, 50))
+                self.window.blit(self.current_image, (int(self.size[0]/2) - 640, 50))
             pygame.display.update()
         pygame.quit()
 
