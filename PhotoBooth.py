@@ -35,7 +35,7 @@ class PhotoBooth:
                     running = False
                 if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                     if event.key == K_ESCAPE:
-                        running = False
+                        pygame.quit()
             self.window.fill((255, 255, 255))
             cam_data = self.camera.capture()
             cam_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
