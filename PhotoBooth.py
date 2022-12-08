@@ -29,9 +29,13 @@ class Camera:
 
     def set_controls(self):
         time.sleep(1)
-        self.camera.set_controls(self.camera.controls)
+        controls = self.camera.controls
+        controls['AeEnable'] = False
+        controls['AwbEnable'] = False
+        self.camera.set_controls(controls)
 
-
+#AeEnable=False
+#AwbEnable=False
 
 class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
