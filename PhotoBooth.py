@@ -30,9 +30,8 @@ class Camera:
     def set_controls(self):
         time.sleep(1)
         controls = self.camera.controls
-        controls['AeEnable'] = False
-        controls['AwbEnable'] = False
         self.camera.set_controls(controls)
+        self.camera.set_controls({'AeEnable': False, 'AwbEnable': False})
 
 #AeEnable=False
 #AwbEnable=False
