@@ -90,5 +90,5 @@ class PhotoBooth:
 
 
 if __name__ == "__main__":
-    pb = PhotoBooth(Camera())
+    pb = PhotoBooth(Camera(), window_size=(1080, 1920))
     pb.run()
