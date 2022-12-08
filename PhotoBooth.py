@@ -29,7 +29,7 @@ class Camera:
 
     def set_controls(self):
         time.sleep(1)
-        controls = {'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False}.update(self.camera.control)
+        controls = {'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False}.update(self.camera.controls)
         print(f'Setting Controls: {controls}')
         self.camera.set_controls(controls)
         #self.camera.set_controls({'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False})
