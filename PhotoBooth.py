@@ -42,8 +42,8 @@ class PhotoBooth:
 
     def run(self):
         running = True
-        starttime = timeit.default_timer()
         while running:
+            starttime = timeit.default_timer()
             #self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
             self.camera.capture(wait=False)
             capturedone = timeit.default_timer()
