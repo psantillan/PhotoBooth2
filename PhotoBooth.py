@@ -18,7 +18,7 @@ class Camera:
         }
         # apply the configuration
         self.camera.configure(self.mode['preview'])
-        self.camera.set_controls()
+        self.set_controls()
         # start camera
         self.camera.start()
 
