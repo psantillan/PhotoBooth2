@@ -1,6 +1,7 @@
 import pygame
 from picamera2 import Picamera2
 import sys
+import timeit
 
 
 class Camera:
@@ -41,9 +42,10 @@ class PhotoBooth:
 
     def run(self):
         running = True
-        # set current image to None will be updated by picamera complete function
+        starttime = timeit.default_timer()
         while running:
-            cam_data = self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
+            self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
+            capturedone = timeit.default_timer()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -56,6 +58,7 @@ class PhotoBooth:
             #raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
             #cam_surface = pygame.transform.scale(raw_surface, (1440, 1080))
             #cam_surface = pygame.transform.scale2x(raw_surface)
+            drawstart = timeit.default_timer()
             self.window.fill((10, 10, 10))
             # Initializing Color
             color = (75, 68, 83)
@@ -76,9 +79,12 @@ class PhotoBooth:
                 800,
                 400
             ], 0, 5)
+            drawend = timeit.default_timer()
             if self.current_image:
                 self.window.blit(self.current_image, (int(self.size[0]/2) - 640, 50))
+            photorendered = timeit.default_timer()
             pygame.display.update()
+            print(f'Timing:\nTotal Time: ${photorendered-starttime}\n  Capture Command: ${capturedone - starttime}\n Draw Calls: ${drawend-drawstart}\n Capture and Render: ${photorendered-drawend}')
         pygame.quit()
 
 
