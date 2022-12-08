@@ -84,7 +84,8 @@ class PhotoBooth:
                 self.window.blit(self.current_image, (int(self.size[0]/2) - 640, 50))
             photorendered = timeit.default_timer()
             pygame.display.update()
-            print(f'Total Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
+            if photorendered-starttime > 0.4:
+                print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
         pygame.quit()
 
 
