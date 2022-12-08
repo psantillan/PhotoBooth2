@@ -13,7 +13,8 @@ class Camera:
         # create sensor configs
         self.mode = {
 
-            'preview': self.camera.create_video_configuration({'size': self.size}),
+            'preview': self.camera.create_video_configuration({'size': self.size, 'buffer_size': 2}),
+            #'preview': self.camera.create_video_configuration( lores={"size": self.size}, encode="lores"),
             'still': self.camera.create_still_configuration()
         }
         # apply the configuration
@@ -47,9 +48,14 @@ class PhotoBooth:
         self.current_image = None
 
     def preview_capture_complete(self, job):
+        callback_start = timeit.default_timer()
         result = self.camera.wait(job)
+        capture_complete = timeit.default_timer()
         capture = pygame.image.frombuffer(result, self.camera.size, 'RGBA')
+        convert_buffer = timeit.default_timer()
         self.current_image = pygame.transform.scale2x(capture)
+        transform = timeit.default_timer()
+        print(f'Capture Time:{transform - callback_start}\n   Job Time:{capture_complete - callback_start}\n   Buffer Convert:{convert_buffer - capture_complete}\n   Transform:{transform - convert_buffer}')
 
 
     def run(self):
@@ -97,7 +103,8 @@ class PhotoBooth:
             photorendered = timeit.default_timer()
             pygame.display.update()
             if photorendered-starttime > 0.14:
-                print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
+                pass
+                #print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
         pygame.quit()
 
 
