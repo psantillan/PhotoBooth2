@@ -12,7 +12,7 @@ class Camera:
         # create sensor configs
         self.mode = {
 
-            'preview': self.camera.create_preview_configuration({'size': self.size}),
+            'preview': self.camera.create_video_configuration({'size': self.size}),
             'still': self.camera.create_still_configuration()
         }
         # apply the configuration
