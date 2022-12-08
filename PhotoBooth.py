@@ -104,7 +104,7 @@ class PhotoBooth:
             pygame.display.update()
             if photorendered-starttime > 0.14:
                 pass
-                #print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
+                print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
         pygame.quit()
 
 
