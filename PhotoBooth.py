@@ -31,9 +31,9 @@ class Camera:
 
     def set_controls(self):
         time.sleep(1)
-        controls = {'AeEnable': False, 'AwbEnable': False, 'FrameDurationLimits': (33333, 33333)}
-        print(f'Setting Controls: {controls}')
-        self.camera.set_controls(controls)
+        #controls = {'AeEnable': False, 'AwbEnable': False, 'FrameDurationLimits': (33333, 33333)}
+        #print(f'Setting Controls: {controls}')
+        #self.camera.set_controls(controls)
         #self.camera.set_controls({'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False})
 
 #AeEnable=False
