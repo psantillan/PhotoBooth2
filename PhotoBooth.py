@@ -31,7 +31,7 @@ class Camera:
         time.sleep(1)
         controls = self.camera.controls
         self.camera.set_controls(controls)
-        self.camera.set_controls({'FrameRate': 50, 'AeEnable': False, 'AwbEnable': False})
+        self.camera.set_controls({'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False})
 
 #AeEnable=False
 #AwbEnable=False
