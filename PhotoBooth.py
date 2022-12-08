@@ -13,7 +13,7 @@ class Camera:
         # create sensor configs
         self.mode = {
 
-            'preview': self.camera.create_video_configuration({'size': self.size}),
+            'preview': self.camera.create_video_configuration({'size': self.size}, main=picam2.sensor_modes[0]),
             #'preview': self.camera.create_video_configuration( lores={"size": self.size}, encode="lores"),
             'still': self.camera.create_still_configuration()
         }
