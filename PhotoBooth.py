@@ -44,8 +44,7 @@ class PhotoBooth:
         running = True
         while running:
             starttime = timeit.default_timer()
-            #self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
-            self.camera.capture(wait=False)
+            self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
             capturedone = timeit.default_timer()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
