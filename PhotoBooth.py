@@ -18,6 +18,7 @@ class Camera:
         }
         # apply the configuration
         self.camera.configure(self.mode['preview'])
+        self.camera.set_controls()
         # start camera
         self.camera.start()
 
@@ -29,7 +30,7 @@ class Camera:
 
     def set_controls(self):
         time.sleep(1)
-        controls = {'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False}.update(self.camera.controls)
+        controls = {'AeEnable': False, 'AwbEnable': False, "ExposureTime": 10000, "AnalogueGain": 1.0, 'FrameDurationLimits': (33333, 33333)}
         print(f'Setting Controls: {controls}')
         self.camera.set_controls(controls)
         #self.camera.set_controls({'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False})
@@ -53,7 +54,6 @@ class PhotoBooth:
 
     def run(self):
         running = True
-        self.camera.set_controls()
         while running:
             starttime = timeit.default_timer()
             self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
