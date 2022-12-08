@@ -53,7 +53,7 @@ class PhotoBooth:
         capture_complete = timeit.default_timer()
         capture = pygame.image.frombuffer(result, self.camera.size, 'RGBA')
         convert_buffer = timeit.default_timer()
-        self.current_image = pygame.transform.scale(raw_surface, (1440, 1080))
+        self.current_image = pygame.transform.scale(capture, (1440, 1080))
         #self.current_image = pygame.transform.scale2x(capture)
         transform = timeit.default_timer()
         print(f'Capture Time:{transform - callback_start}\n   Job Time:{capture_complete - callback_start}\n   Buffer Convert:{convert_buffer - capture_complete}\n   Transform:{transform - convert_buffer}')
