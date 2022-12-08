@@ -29,9 +29,10 @@ class Camera:
 
     def set_controls(self):
         time.sleep(1)
-        controls = self.camera.controls
+        controls = {'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False}.update(self.camera.control)
+        print(f'Setting Controls: {controls}')
         self.camera.set_controls(controls)
-        self.camera.set_controls({'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False})
+        #self.camera.set_controls({'FrameRate': 24, 'AeEnable': False, 'AwbEnable': False})
 
 #AeEnable=False
 #AwbEnable=False
@@ -95,7 +96,7 @@ class PhotoBooth:
                 self.window.blit(self.current_image, (int(self.size[0]/2) - 640, 50))
             photorendered = timeit.default_timer()
             pygame.display.update()
-            if photorendered-starttime > 0.04:
+            if photorendered-starttime > 0.14:
                 print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
         pygame.quit()
 
