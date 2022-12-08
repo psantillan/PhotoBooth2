@@ -44,7 +44,8 @@ class PhotoBooth:
         running = True
         starttime = timeit.default_timer()
         while running:
-            self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
+            #self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
+            self.camera.capture(wait=False)
             capturedone = timeit.default_timer()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -84,7 +85,7 @@ class PhotoBooth:
                 self.window.blit(self.current_image, (int(self.size[0]/2) - 640, 50))
             photorendered = timeit.default_timer()
             pygame.display.update()
-            print(f'Timing:\nTotal Time: ${photorendered-starttime}\n  Capture Command: ${capturedone - starttime}\n Draw Calls: ${drawend-drawstart}\n Capture and Render: ${photorendered-drawend}')
+            print(f'Total Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
         pygame.quit()
 
 
