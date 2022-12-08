@@ -2,6 +2,7 @@ import pygame
 from picamera2 import Picamera2
 import sys
 import timeit
+import time
 
 
 class Camera:
@@ -26,6 +27,12 @@ class Camera:
     def wait(self, job):
         return self.camera.wait(job)
 
+    def set_controls(self):
+        time.sleep(1)
+        self.camera.set_controls(self.camera.controls)
+
+
+
 class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
         pygame.init()
@@ -42,6 +49,7 @@ class PhotoBooth:
 
     def run(self):
         running = True
+        self.camera.set_controls()
         while running:
             starttime = timeit.default_timer()
             self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
