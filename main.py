@@ -1,4 +1,4 @@
-import PhotoBooth
+from PhotoBooth import PhotoBooth
 from Camera import Camera
 import pygame
 
