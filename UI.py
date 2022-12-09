@@ -19,7 +19,16 @@ class PhotoBooth:
         display_info = pygame.display.Info()
         return display_info.current_w, display_info.current_h
 
+    def handle(self, event):
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+            if event.key and event.key == pygame.K_ESCAPE:
+                pygame.quit()
+
+
     def run(self):
         while self.running:
+            for event in pygame.event.get():
+                self.handle(event)
             pygame.display.update()
+
 
