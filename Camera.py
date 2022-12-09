@@ -12,7 +12,7 @@ class Camera:
             'preview': self.camera.create_preview_configuration(),
         }
         self.setup_camera('video')
-        self.camera.pre_callback = self.pre_callback
+        #self.camera.pre_callback = self.pre_callback
 
     def __enter__(self):
         self.camera.start()
