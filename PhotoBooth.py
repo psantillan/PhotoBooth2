@@ -15,7 +15,6 @@ class Camera:
         # create sensor configs
         self.encoder = Encoder()
         self.output = CircularOutput()
-        self.camera.start_recording(self.encoder, self.output)
         self.mode = {
 
             'preview': self.camera.create_video_configuration({'size': self.size}),
@@ -26,6 +25,7 @@ class Camera:
         self.camera.configure(self.mode['preview'])
         self.set_controls()
         # start camera
+        self.camera.start_recording(self.encoder, self.output)
         self.output.start()
         #self.camera.start()
 
