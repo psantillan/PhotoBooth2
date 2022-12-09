@@ -24,7 +24,6 @@ class PhotoBooth:
             if event.key and event.key == pygame.K_ESCAPE:
                 pygame.quit()
 
-
     def run(self):
         while self.running:
             for event in pygame.event.get():

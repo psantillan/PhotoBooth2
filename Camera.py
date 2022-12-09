@@ -13,7 +13,7 @@ class Camera:
         }
         self.setup_camera('video')
         self.camera.start()
-        #self.camera.pre_callback = self.pre_callback
+        self.camera.pre_callback = self.pre_callback
 
     def __enter__(self):
         return self.camera
