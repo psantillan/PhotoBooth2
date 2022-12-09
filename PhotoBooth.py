@@ -13,6 +13,9 @@ class Camera:
         self.camera = Picamera2()
         self.size = (480, 320) if 'size' not in kwargs else kwargs['size']
         # create sensor configs
+        self.encoder = Encoder()
+        self.output = CircularOutput()
+        self.camera.start_recording(self.encoder, self.output)
         self.mode = {
 
             'preview': self.camera.create_video_configuration({'size': self.size}),
@@ -67,10 +70,6 @@ class PhotoBooth:
 
     def run(self):
         running = True
-        encoder = Encoder()
-        output = CircularOutput()
-        self.camera.start_recording(encoder, output)
-        output.start()
         while running:
             starttime = timeit.default_timer()
             self.current_image = pygame.image.frombuffer(output, self.camera.size, 'RGBA')
@@ -117,7 +116,7 @@ class PhotoBooth:
             if photorendered-starttime > 0.14:
                 pass
                 print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
-        output.stop()
+        self.camera.camera.stop()
         pygame.quit()
 
 
