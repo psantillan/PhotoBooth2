@@ -2,10 +2,10 @@ from picamera2 import Picamera2, MappedArray
 
 
 class Camera:
-    def __init__(self, *args, **kwargs):
+    def __init__(self, framebuffer, *args, **kwargs):
         self.camera = Picamera2()
         self.size = (640, 480)
-        self.current_frame = None
+        self.framebuffer = framebuffer
         self.mode = {
             'video': self.camera.create_video_configuration({'size': self.size}),
             'still': self.camera.create_still_configuration(),
@@ -26,4 +26,4 @@ class Camera:
 
     def pre_callback(self, request):
         with MappedArray(request, "main") as m:
-            print(m.array)
+            self.framebuffer = m.array
