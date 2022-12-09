@@ -5,6 +5,7 @@ from picamera2.encoders import Encoder
 import sys
 import timeit
 import time
+import cv2
 
 
 class Camera:
@@ -14,10 +15,9 @@ class Camera:
         self.size = (480, 320) if 'size' not in kwargs else kwargs['size']
         # create sensor configs
         self.encoder = Encoder()
-        self.output = CircularOutput()
         self.mode = {
 
-            'preview': self.camera.create_video_configuration({'size': self.size}),
+            'preview': self.camera.create_video_configuration({'size': self.size, 'format': 'YUV420'}),
             #'preview': self.camera.create_video_configuration( lores={"size": self.size}, encode="lores"),
             'still': self.camera.create_still_configuration()
         }
@@ -25,8 +25,8 @@ class Camera:
         self.camera.configure(self.mode['preview'])
         self.set_controls()
         # start camera
-        self.camera.start_recording(self.encoder, self.output)
-        self.output.start()
+        #self.camera.start_recording(self.encoder, self.output)
+        #self.output.start()
         #self.camera.start()
 
     def capture(self, *args, **kwargs):
@@ -50,11 +50,16 @@ class Camera:
 
 class PhotoBooth:
     def __init__(self, camera, *args, **kwargs):
-        pygame.init()
         self.camera = camera
         self.size = (1600, 2560) if 'window_size' not in kwargs else kwargs['window_size']
         self.window = pygame.display.set_mode(self.size, pygame.NOFRAME)
-        self.current_image = None
+
+    def __enter__(self):
+        pygame.init()
+        return self.window
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        return pygame.quit()
 
     def preview_capture_complete(self, job):
         callback_start = timeit.default_timer()
