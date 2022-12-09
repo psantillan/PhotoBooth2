@@ -26,7 +26,8 @@ class Camera:
         self.camera.configure(self.mode['preview'])
         self.set_controls()
         # start camera
-        self.camera.start()
+        self.output.start()
+        #self.camera.start()
 
     def capture(self, *args, **kwargs):
         return self.camera.capture_buffer(*args, **kwargs)
@@ -72,7 +73,7 @@ class PhotoBooth:
         running = True
         while running:
             starttime = timeit.default_timer()
-            self.current_image = pygame.image.frombuffer(output, self.camera.size, 'RGBA')
+            self.current_image = pygame.image.frombuffer(self.camera.output, self.camera.size, 'RGBA')
             #self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
             capturedone = timeit.default_timer()
             for event in pygame.event.get():
