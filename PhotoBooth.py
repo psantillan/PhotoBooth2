@@ -1,5 +1,7 @@
 import pygame
 from picamera2 import Picamera2
+from picamera2.outputs import CircularOutput
+from picamera2.encoders import Encoder
 import sys
 import timeit
 import time
@@ -25,6 +27,9 @@ class Camera:
 
     def capture(self, *args, **kwargs):
         return self.camera.capture_buffer(*args, **kwargs)
+
+    def start_recording(self, *args, **kwargs):
+        return self.camera.start_recording(*args, **kwargs)
 
     def wait(self, job):
         return self.camera.wait(job)
@@ -62,9 +67,14 @@ class PhotoBooth:
 
     def run(self):
         running = True
+        encoder = Encoder()
+        output = CircularOutput()
+        self.camera.start_recording(encoder, output)
+        output.start()
         while running:
             starttime = timeit.default_timer()
-            self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
+            self.current_image = pygame.image.frombuffer(output, self.camera.size, 'RGBA')
+            #self.camera.capture(wait=False, signal_function=self.preview_capture_complete)
             capturedone = timeit.default_timer()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -107,6 +117,7 @@ class PhotoBooth:
             if photorendered-starttime > 0.14:
                 pass
                 print(f'Long Frame Time: {photorendered-starttime}\n  Capture Command: {capturedone - starttime}\n  Draw Calls: {drawend-drawstart}\n  Capture and Render: {photorendered-drawend}')
+        output.stop()
         pygame.quit()
 
 
