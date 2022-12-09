@@ -10,7 +10,7 @@ class PhotoBooth:
         self.running = True
 
     def __enter__(self):
-        return self.window
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pygame.quit()
