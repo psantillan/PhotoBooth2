@@ -26,4 +26,4 @@ class Camera:
 
     def pre_callback(self, request):
         with MappedArray(request, "main") as m:
-            self.current_frame = m.array
+            print(m.array)
