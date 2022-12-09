@@ -5,7 +5,7 @@ from picamera2.encoders import Encoder
 import sys
 import timeit
 import time
-import cv2
+
 
 
 class Camera:
