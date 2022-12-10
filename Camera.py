@@ -1,5 +1,5 @@
 from picamera2 import Picamera2, MappedArray, Preview
-from picamera2.encoders import Encoder, V4L2Encoder
+from picamera2.encoders import Encoder
 
 
 class PyGameEncoder(Encoder):
