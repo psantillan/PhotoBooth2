@@ -36,8 +36,7 @@ class Camera:
         print(request)
         with MappedArray(request, "main") as m:
             pass
-        print(x)
 
     def post_callback(self, request):
         with MappedArray(request, "main") as m:
-            print(m)
+            print(m.array)
