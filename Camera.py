@@ -41,3 +41,4 @@ class Camera:
         with MappedArray(request, "main") as m:
             print(m.array)
             self.framebuffer.current_frame = m.array
+            break
