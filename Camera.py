@@ -38,4 +38,4 @@ class Camera:
 
     def post_callback(self, request):
         with MappedArray(request, "main") as m:
-            self.framebuffer = m.array
+            print(m)
