@@ -33,8 +33,11 @@ class Camera:
         self.camera.configure(self.mode[mode])
 
     def pre_callback(self, request):
+        x = None
         with MappedArray(request, "main") as m:
-            self.framebuffer = m.array
+            x = m.array
+
+        print(x)
 
     def post_callback(self, request):
         with MappedArray(request, "main") as m:
