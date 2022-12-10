@@ -10,5 +10,5 @@ if __name__ == '__main__':
     fb = Framebuffer
     with Camera(fb) as camera:
         pass
-        #with PhotoBooth(camera, fb, window_size=(1080, 1920)) as pb:
-            #pb.run()
+        with PhotoBooth(camera, fb, window_size=(1080, 1920)) as pb:
+            pb.run()
