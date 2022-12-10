@@ -14,7 +14,7 @@ class Camera:
         print(self.camera.sensor_modes)
         self.current_frame = None
         self.mode = {
-            'video': self.camera.create_video_configuration({'size': self.size}, raw=self.camera.sensor_modes[0]),
+            'video': self.camera.create_video_configuration({'size': self.size, 'format': 'SRGGB10_CSI2P'}),
             'still': self.camera.create_still_configuration(),
             'preview': self.camera.create_preview_configuration(),
         }
