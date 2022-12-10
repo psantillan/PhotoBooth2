@@ -35,8 +35,7 @@ class Camera:
     def pre_callback(self, request):
         print(request)
         with MappedArray(request, "main") as m:
-
-
+            pass
         print(x)
 
     def post_callback(self, request):
