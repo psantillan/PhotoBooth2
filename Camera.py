@@ -12,7 +12,7 @@ class Camera:
         self.camera = Picamera2()
         self.size = (640, 480)
         print(self.camera.sensor_modes)
-        self.current_frame - None
+        self.current_frame = None
         self.mode = {
             'video': self.camera.create_video_configuration({'size': self.size}),
             'still': self.camera.create_still_configuration(),
