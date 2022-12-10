@@ -38,7 +38,7 @@ class Camera:
             pass
 
     def post_callback(self, request):
+        print(request)
         with MappedArray(request, "main") as m:
             print(m.array)
             self.framebuffer.current_frame = m.array
-            break
