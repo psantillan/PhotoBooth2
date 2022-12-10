@@ -11,17 +11,15 @@ class Camera:
     def __init__(self, framebuffer, *args, **kwargs):
         self.camera = Picamera2()
         self.size = (640, 480)
-        self.framebuffer = framebuffer
+        print(self.camera.sensor_modes)
+        self.current_frame - None
         self.mode = {
             'video': self.camera.create_video_configuration({'size': self.size}),
             'still': self.camera.create_still_configuration(),
             'preview': self.camera.create_preview_configuration(),
         }
         self.setup_camera('video')
-        #self.camera.post_callback = self.post_callback
-        #self.camera.start()
-
-        #self.camera.pre_callback = self.pre_callback
+        self.camera.start()
 
     def __enter__(self):
         return self.camera
@@ -31,12 +29,4 @@ class Camera:
 
     def setup_camera(self, mode, **kwargs):
         self.camera.configure(self.mode[mode])
-
-    def pre_callback(self, request):
-        print(request)
-        with MappedArray(request, "main") as m:
-            pass
-
-    def post_callback(self, request):
-        print(request)
 
