@@ -88,11 +88,6 @@ class PhotoBooth:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         sys.exit()
-
-
-            #raw_surface = pygame.image.frombuffer(cam_data, self.camera.size, 'RGBA')
-            #cam_surface = pygame.transform.scale(raw_surface, (1440, 1080))
-            #cam_surface = pygame.transform.scale2x(raw_surface)
             drawstart = timeit.default_timer()
             self.window.fill((10, 10, 10))
             # Initializing Color

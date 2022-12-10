@@ -1,4 +1,10 @@
 from picamera2 import Picamera2, MappedArray
+from picamera2.encoders import Encoder
+
+
+class PyGameEncoder(Encoder):
+    def __init__(self):
+        super().__init__()
 
 
 class Camera:
@@ -12,8 +18,10 @@ class Camera:
             'preview': self.camera.create_preview_configuration(),
         }
         self.setup_camera('video')
+        self.camera.post_callback = self.post_callback
         self.camera.start()
-        self.camera.pre_callback = self.pre_callback
+
+        #self.camera.pre_callback = self.pre_callback
 
     def __enter__(self):
         return self.camera
@@ -25,5 +33,9 @@ class Camera:
         self.camera.configure(self.mode[mode])
 
     def pre_callback(self, request):
+        with MappedArray(request, "main") as m:
+            self.framebuffer = m.array
+
+    def post_callback(self, request):
         with MappedArray(request, "main") as m:
             self.framebuffer = m.array
