@@ -20,12 +20,10 @@ class Camera:
         self.setup_camera('video')
         #self.camera.post_callback = self.post_callback
         #self.camera.start()
-        self.camera.start_preview(Preview.DRM)
 
         #self.camera.pre_callback = self.pre_callback
 
     def __enter__(self):
-
         return self.camera
 
     def __exit__(self, exc_type, exc_val, exc_tb):
