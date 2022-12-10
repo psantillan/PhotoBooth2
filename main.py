@@ -1,7 +1,7 @@
 from UI import PhotoBooth
 from Camera import Camera
 from Framebuffer import Framebuffer
-from pygame import Preview
+from picamera2 import Preview
 import pygame
 
 if __name__ == '__main__':
