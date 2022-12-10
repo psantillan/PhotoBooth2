@@ -12,10 +12,9 @@ class Camera:
         self.camera = Picamera2()
         self.size = (1332, 990)
         self.format = 'SRGGB10_CSI2P'
-        print(self.camera.sensor_modes)
         self.current_frame = None
         self.mode = {
-            'video': self.camera.create_video_configuration(raw={'format': str(self.camera.sensor_modes[0]['format'])}),
+            'video': self.camera.create_video_configuration(raw={'format': str(self.format), 'size':self.size}),
             'still': self.camera.create_still_configuration(),
             'preview': self.camera.create_preview_configuration(),
         }
