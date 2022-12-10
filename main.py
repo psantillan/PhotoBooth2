@@ -6,5 +6,7 @@ import pygame
 if __name__ == '__main__':
     fb = Framebuffer
     with Camera(fb) as camera:
-        with PhotoBooth(camera, fb, window_size=(1080, 1920)) as pb:
-            pb.run()
+        while True:
+            pass
+        #with PhotoBooth(camera, fb, window_size=(1080, 1920)) as pb:
+            #pb.run()
