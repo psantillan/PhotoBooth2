@@ -1,5 +1,5 @@
 from picamera2 import Picamera2, MappedArray
-from picamera2.encoders import Encoder
+from picamera2.encoders import Encoder, V4L2Encoder
 
 
 class PyGameEncoder(Encoder):
@@ -20,7 +20,7 @@ class Camera:
         self.setup_camera('video')
         #self.camera.post_callback = self.post_callback
         #self.camera.start()
-        self.camera.start_recording(PyGameEncoder(), None)
+        self.camera.start_recording(V4L2Encoder(), None)
 
         #self.camera.pre_callback = self.pre_callback
 
