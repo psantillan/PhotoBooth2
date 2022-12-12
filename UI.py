@@ -1,5 +1,5 @@
 import pygame
-
+import timeit
 
 class PhotoBooth:
     def __init__(self, camera, **kwargs):
@@ -32,12 +32,17 @@ class PhotoBooth:
         #return capture
 
     def run(self):
+        avg = 0
         while self.running:
+            start = timeit.default_timer()
             for event in pygame.event.get():
                 self.handle(event)
             self.camera.capture_buffer(wait=False, signal_function=self.capture_complete)
             if self.current_frame:
                 self.window.blit(self.current_frame, (0, 0))
+
             pygame.display.update()
+            end = timeit.default_timer()
+            avg = (avg + (end - start))/2
 
 
