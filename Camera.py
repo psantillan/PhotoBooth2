@@ -11,11 +11,11 @@ class PyGameEncoder(Encoder):
 class Camera:
     def __init__(self, *args, **kwargs):
         self.camera = Picamera2()
-        self.size = (640, 360)
+        self.size = (1332, 990)
         self.format = 'SRGGB10_CSI2P'
         self.current_frame = None
         self.mode = {
-            'video': self.camera.create_video_configuration(raw={'format': str(self.format), 'size': self.size}),
+            'video': self.camera.create_video_configuration({'size':(640,360)}, raw={'format': str(self.format), 'size': self.size}),
             'still': self.camera.create_still_configuration(),
             'preview': self.camera.create_preview_configuration(),
         }
