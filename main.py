@@ -11,18 +11,5 @@ if __name__ == '__main__':
     pygame.init()
     window = pygame.display.set_mode((600,400))
     with Camera() as camera:
-        data = io.BytesIO()
-        output = FileOutput(data)
-        encoder = Encoder()
-        camera.start_recording(encoder, output)
-        output.start()
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
-                    if event.key and event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-            print(sys.getsizeof(data))
-            pygame.display.update()
-
-        #with PhotoBooth(camera, window_size=(1080, 1920)) as pb:
-            #pb.run()
+        with PhotoBooth(camera, window_size=(1080, 1920)) as pb:
+            pb.run()
