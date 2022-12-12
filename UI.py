@@ -1,13 +1,14 @@
 import pygame
 
+
 class PhotoBooth:
-    def __init__(self, camera, framebuffer, **kwargs):
+    def __init__(self, camera, **kwargs):
         pygame.init()
         self.camera = camera
         self.window_size = self.setup_window() if 'window_size' not in kwargs else kwargs['window_size']
         self.window = pygame.display.set_mode(self.window_size, pygame.NOFRAME)
-        self.current_frame = framebuffer
         self.running = True
+        self.current_frame = None
 
     def __enter__(self):
         return self
@@ -24,10 +25,19 @@ class PhotoBooth:
             if event.key and event.key == pygame.K_ESCAPE:
                 pygame.quit()
 
+    def capture_complete(self, job):
+        result = self.camera.wait(job)
+        capture = pygame.image.frombuffer(result, self.camera.size, 'RGBA')
+        self.current_frame = capture
+        #return capture
+
     def run(self):
         while self.running:
             for event in pygame.event.get():
                 self.handle(event)
+            self.camera.capture_buffer(wait=False, signal_function=self.capture_complete)
+            if self.current_frame:
+                self.window.blit(self.current_frame, (0, 0))
             pygame.display.update()
 
 

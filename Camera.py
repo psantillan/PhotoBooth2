@@ -3,18 +3,19 @@ from picamera2.encoders import Encoder
 
 
 class PyGameEncoder(Encoder):
-    def __init__(self):
+    def __init__(self, surface):
         super().__init__()
+        self.surface = surface
 
 
 class Camera:
-    def __init__(self, framebuffer, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.camera = Picamera2()
         self.size = (1332, 990)
         self.format = 'SRGGB10_CSI2P'
         self.current_frame = None
         self.mode = {
-            'video': self.camera.create_video_configuration(raw={'format': str(self.format), 'size':self.size}),
+            'video': self.camera.create_video_configuration(raw={'format': str(self.format), 'size': self.size}),
             'still': self.camera.create_still_configuration(),
             'preview': self.camera.create_preview_configuration(),
         }
@@ -29,4 +30,5 @@ class Camera:
 
     def setup_camera(self, mode, **kwargs):
         self.camera.configure(self.mode[mode])
+
 

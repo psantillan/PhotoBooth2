@@ -73,7 +73,6 @@ class PhotoBooth:
         transform = timeit.default_timer()
         print(f'Capture Time:{transform - callback_start}\n   Job Time:{capture_complete - callback_start}\n   Buffer Convert:{convert_buffer - capture_complete}\n   Transform:{transform - convert_buffer}')
 
-
     def run(self):
         running = True
         while running:
