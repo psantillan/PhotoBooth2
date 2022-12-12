@@ -27,7 +27,7 @@ class PhotoBooth:
 
     def capture_complete(self, job):
         result = self.camera.wait(job)
-        capture = pygame.image.frombuffer(result, self.camera.size, 'RGBA')
+        capture = pygame.image.frombuffer(result, self.camera.video_configuration.main.size, 'RGBA')
         self.current_frame = capture
         #return capture
 
