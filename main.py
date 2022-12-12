@@ -8,8 +8,6 @@ import sys
 
 
 if __name__ == '__main__':
-    pygame.init()
-    window = pygame.display.set_mode((600,400))
     with Camera() as camera:
         with PhotoBooth(camera, window_size=(1080, 1920)) as pb:
             pb.run()
