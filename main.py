@@ -4,6 +4,7 @@ from picamera2.encoders import Encoder
 from picamera2.outputs import FileOutput
 import io
 import pygame
+import sys
 
 
 if __name__ == '__main__':
@@ -20,7 +21,7 @@ if __name__ == '__main__':
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
                     if event.key and event.key == pygame.K_ESCAPE:
                         pygame.quit()
-            print(data)
+            print(sys.getsizeof(data))
             pygame.display.update()
 
         #with PhotoBooth(camera, window_size=(1080, 1920)) as pb:
