@@ -20,7 +20,7 @@ class Camera:
             'preview': self.camera.create_preview_configuration(),
         }
         self.setup_camera('video')
-        self.camera.start()
+        #self.camera.start()
 
     def __enter__(self):
         return self.camera
