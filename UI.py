@@ -34,6 +34,7 @@ class PhotoBooth:
     def run(self):
         avg = 0
         while self.running:
+            print(avg)
             start = timeit.default_timer()
             for event in pygame.event.get():
                 self.handle(event)
