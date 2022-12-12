@@ -14,6 +14,7 @@ if __name__ == '__main__':
         output = FileOutput(data)
         encoder = Encoder()
         camera.start_recording(encoder, output)
+        output.start()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
