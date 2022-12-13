@@ -26,6 +26,11 @@ class PhotoBoothUI:
             if event.key and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
+            elif event.key:
+                if event.key == pygame.KEYUP:
+                    pass
+                if event.key == pygame.KEYDOWN:
+                    pass
 
     def render_all(self, current_frame=None):
         for event in pygame.event.get():

@@ -1,5 +1,7 @@
 from picamera2 import Picamera2, MappedArray, Preview
 from picamera2.encoders import Encoder
+from libcamera import controls
+import time
 
 
 class PyGameEncoder(Encoder):
@@ -33,6 +35,11 @@ class Camera:
         self.setup_camera('video')
         self.camera.pre_callback = self.capture_pre_callback
         self.camera.start()
+        print('Waiting for 1 secnod to get camera defaults')
+        time.sleep(1)
+        current_control = self.camera.camera_controls
+        print(current_control)
+        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot})
 
     def __enter__(self):
         return self

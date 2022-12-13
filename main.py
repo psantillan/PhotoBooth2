@@ -1,5 +1,6 @@
 from UI import PhotoBoothUI
 from Camera import Camera
+import sys
 
 
 if __name__ == '__main__':
