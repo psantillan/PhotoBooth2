@@ -37,9 +37,9 @@ class Camera:
         self.camera.start()
         print('Waiting for 1 secnod to get camera defaults')
         time.sleep(1)
+        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot, "AwbEnable": False, "AeEnable": False})
         current_control = self.camera.camera_controls
         print(current_control)
-        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot, "AwbEnable": False, "AeEnable": False})
 
     def __enter__(self):
         return self
