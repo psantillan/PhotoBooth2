@@ -39,7 +39,7 @@ class Camera:
         time.sleep(1)
         current_control = self.camera.camera_controls
         print(current_control)
-        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot})
+        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot, "AwbEnable": False, "AeEnable": False})
 
     def __enter__(self):
         return self
