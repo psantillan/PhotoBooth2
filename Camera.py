@@ -14,6 +14,7 @@ class Camera:
         self.sensor_size = (1332, 990)
         self.sensor_format = 'SRGGB10_CSI2P'
         self.output_size = (640, 360)
+        self.test = None
         self.current_frame = {
             'data': None,
             'size': self.output_size,
@@ -52,6 +53,6 @@ class Camera:
 
     def capture_pre_callback(self, request):
         with MappedArray(request, "main") as m:
-            print(m.array)
+            self.test = m.array
 
 
