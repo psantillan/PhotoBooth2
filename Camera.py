@@ -43,7 +43,7 @@ class Camera:
         self.camera.configure(self.mode[mode])
 
     def async_capture(self):
-        return self.camera.capture(wait=False, signal_function=self.capture_complete_callback)
+        return self.camera.capture_buffer(wait=False, signal_function=self.capture_complete_callback)
 
     def capture_complete_callback(self, job):
         result = self.camera.wait(job)
