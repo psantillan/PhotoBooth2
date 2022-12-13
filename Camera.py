@@ -31,6 +31,7 @@ class Camera:
             'preview': self.camera.create_preview_configuration(),
         }
         self.setup_camera('video')
+        self.camera.pre_callback = self.capture_pre_callback
         self.camera.start()
 
     def __enter__(self):
@@ -48,5 +49,9 @@ class Camera:
     def capture_complete_callback(self, job):
         result = self.camera.wait(job)
         self.current_frame['data'] = result
+
+    def capture_pre_callback(self, request):
+        with MappedArray(request, "main") as m:
+            print(m)
 
 
