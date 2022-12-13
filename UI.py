@@ -11,7 +11,7 @@ class timeout:
         raise TimeoutError(self.error_message)
     def __enter__(self):
         signal.signal(signal.SIGALRM, self.handle_timeout)
-        signal.setitimer(signal.ITIMER_REAL, 0.2, 0.1)
+        signal.setitimer(signal.ITIMER_REAL, 0.13, 0.01)
         #signal.alarm(self.seconds)
     def __exit__(self, type, value, traceback):
         signal.setitimer(signal.ITIMER_REAL, 0)
@@ -58,8 +58,12 @@ class PhotoBooth:
 
     def run(self):
         while self.running:
-            with timeout(seconds=0.12):
-                self.render_all()
+            try:
+                with timeout():
+                    self.render_all()
+            except TimeoutError:
+                pass
+
 
 
 
