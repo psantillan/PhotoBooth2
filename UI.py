@@ -1,5 +1,20 @@
 import pygame
 import timeit
+import signal
+
+
+class timeout:
+    def __init__(self, seconds=1, error_message='Timeout'):
+        self.seconds = seconds
+        self.error_message = error_message
+    def handle_timeout(self, signum, frame):
+        raise TimeoutError(self.error_message)
+    def __enter__(self):
+        signal.signal(signal.SIGALRM, self.handle_timeout)
+        signal.alarm(self.seconds)
+    def __exit__(self, type, value, traceback):
+        signal.alarm(0)
+
 
 class PhotoBooth:
     def __init__(self, camera, **kwargs):
@@ -31,19 +46,18 @@ class PhotoBooth:
         self.current_frame = capture
         #return capture
 
-    def run(self):
-        avg = 0
-        while self.running:
-            print(avg)
-            start = timeit.default_timer()
-            for event in pygame.event.get():
-                self.handle(event)
-            self.camera.capture_buffer(wait=False, signal_function=self.capture_complete)
-            if self.current_frame:
-                self.window.blit(self.current_frame, (0, 0))
+    def render_all(self):
+        for event in pygame.event.get():
+            self.handle(event)
+        self.camera.capture_buffer(wait=False, signal_function=self.capture_complete)
+        if self.current_frame:
+            self.window.blit(self.current_frame, (0, 0))
+        pygame.display.update()
 
-            pygame.display.update()
-            end = timeit.default_timer()
-            avg = (avg + (end - start))/2
+    def run(self):
+        while self.running:
+            with timeout(seconds=0.12):
+                self.render_all()
+
 
 
