@@ -7,6 +7,7 @@ class PhotoBoothUI:
         pygame.init()
         self.window_size = self.setup_window() if 'window_size' not in kwargs else kwargs['window_size']
         self.window = pygame.display.set_mode(self.window_size, pygame.NOFRAME)
+        self.clock = pygame.time.Clock()
 
     def __enter__(self):
         return self
@@ -39,6 +40,7 @@ class PhotoBoothUI:
             surf = self.make_surface_from_frame(current_frame)
             self.window.blit(surf, (0, 0))
         pygame.display.update()
+        self.clock.tick(30)
 
 
 
