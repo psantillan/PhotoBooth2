@@ -11,11 +11,22 @@ class PyGameEncoder(Encoder):
 class Camera:
     def __init__(self, *args, **kwargs):
         self.camera = Picamera2()
-        self.size = (1332, 990)
-        self.format = 'SRGGB10_CSI2P'
-        self.current_frame = None
+        self.sensor_size = (1332, 990)
+        self.sensor_format = 'SRGGB10_CSI2P'
+        self.output_size = (640, 360)
+        self.current_frame = {
+            'data': None,
+            'size': self.output_size,
+            'format': 'RGBA'
+        }
         self.mode = {
-            'video': self.camera.create_video_configuration({'size':(640,360)}, raw={'format': str(self.format), 'size': self.size}),
+            'video': self.camera.create_video_configuration(
+                {'size':self.output_size},
+                raw={
+                    'format': str(self.sensor_format),
+                    'size': self.sensor_size
+                }
+            ),
             'still': self.camera.create_still_configuration(),
             'preview': self.camera.create_preview_configuration(),
         }
@@ -23,12 +34,19 @@ class Camera:
         self.camera.start()
 
     def __enter__(self):
-        return self.camera
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.camera.stop()
 
     def setup_camera(self, mode, **kwargs):
         self.camera.configure(self.mode[mode])
+
+    def async_capture(self):
+        return self.camera.capture(wait=False, signal_function=self.capture_complete_callback)
+
+    def capture_complete_callback(self, job):
+        result = self.camera.wait(job)
+        self.current_frame['data'] = result
 
 
