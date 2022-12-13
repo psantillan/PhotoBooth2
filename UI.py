@@ -15,7 +15,7 @@ class PhotoBoothUI:
         pygame.quit()
 
     def make_surface_from_frame(self, frame):
-        return pygame.image.frombuffer(frame.data, frame.size, frame.format)
+        return pygame.image.frombuffer(frame['data'], frame['size'], frame['format'])
 
     def setup_window(self):
         display_info = pygame.display.Info()
