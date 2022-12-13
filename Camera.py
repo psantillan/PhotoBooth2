@@ -52,6 +52,6 @@ class Camera:
 
     def capture_pre_callback(self, request):
         with MappedArray(request, "main") as m:
-            print(m)
+            print(m.array)
 
 
