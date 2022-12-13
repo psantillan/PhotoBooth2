@@ -8,7 +8,7 @@ class timeout:
         self.seconds = seconds
         self.error_message = error_message
     def handle_timeout(self, signum, frame):
-        pass
+        break
         #print(self.error_message)
         #raise TimeoutError(self.error_message)
     def __enter__(self):
@@ -45,9 +45,10 @@ class PhotoBooth:
                 pygame.quit()
 
     def capture_complete(self, job):
-        result = self.camera.wait(job)
-        capture = pygame.image.frombuffer(result, self.camera.video_configuration.main.size, 'RGBA')
-        self.current_frame = capture
+        with timeout():
+            result = self.camera.wait(job)
+            capture = pygame.image.frombuffer(result, self.camera.video_configuration.main.size, 'RGBA')
+            self.current_frame = capture
         #return capture
 
     def render_all(self):
