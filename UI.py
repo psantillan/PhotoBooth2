@@ -8,11 +8,11 @@ class timeout:
         self.seconds = seconds
         self.error_message = error_message
     def handle_timeout(self, signum, frame):
-        break
+        pass
         #print(self.error_message)
         #raise TimeoutError(self.error_message)
     def __enter__(self):
-        signal.signal(signal.SIGALRM, self.handle_timeout)
+        signal.signal(signal.ITIMER_REAL, self.handle_timeout)
         signal.setitimer(signal.ITIMER_REAL, 0.13, 0.01)
         #signal.alarm(self.seconds)
     def __exit__(self, type, value, traceback):
