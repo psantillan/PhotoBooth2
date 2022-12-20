@@ -38,7 +38,7 @@ class Camera:
         }
         self.setup_camera('video')
         self.camera.pre_callback = self.capture_pre_callback
-        self.ring_buffer_manager = CircularOutput(file=self.current_frame['data'], buffer_size=1)
+        self.ring_buffer_manager = CircularOutput(file=self.current_frame['data'], buffersize=1)
 
     def __enter__(self):
         #self.camera.start()
