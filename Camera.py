@@ -24,7 +24,7 @@ class Camera:
             'frame': BytesIO(),
             'size': self.output_size,
             'format': 'RGBA',
-            'data': lambda _: self.current_frame['frame'].read()
+            'data': lambda: self.current_frame['frame'].read()
         }
         self.mode = {
             'video': self.camera.create_video_configuration(
