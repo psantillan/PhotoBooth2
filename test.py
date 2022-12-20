@@ -8,6 +8,7 @@ class PyGameCamera:
         pygame.camera.init()
         self.window = pygame.display.set_mode((700, 500), pygame.NOFRAME)
         self.camera = pygame.camera.Camera('/dev/media1')
+        self.cameras = [pygame.camera.Camera(x) for x in pygame.camera.list_cameras()]
         print(pygame.camera.list_cameras())
         #self.camera.stop()
         #self.camera.start()
@@ -25,6 +26,11 @@ class PyGameCamera:
                             pass
                         if event.key == pygame.KEYDOWN:
                             pass
+            for camera in self.cameras:
+                try:
+                    camera.start()
+                except Exception as e:
+                    print(e)
             ready = self.camera.query_image()
             print(f'img ready {ready}')
             pygame.display.update()
