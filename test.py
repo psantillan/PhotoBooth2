@@ -1,41 +1,27 @@
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-from matplotlib.animation import FuncAnimation
+import pygame
+import pygame.camera
+import sys
+from UI import PhotoBoothUI
 
-# Create a figure and a 3D axes
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+class PyGameCamera:
+    def __init__(self):
+        self.window = pygame.display.set_mode((700, 500), pygame.NOFRAME)
+        self.camera = pygame.camera.Camera('/dev/media1')
+        self.camera.start()
 
-# Set the initial view
-ax.view_init(elev=15, azim=-25)
-
-# Set the axes limits
-ax.set_xlim(-1.5, 1.5)
-ax.set_ylim(-1.5, 1.5)
-ax.set_zlim(-1.5, 1.5)
-
-# Set the axes labels
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-
-# Create a FuncAnimation object to animate the Earth's orbit
-earth_orbit, = ax.plot([], [], [], 'b')
-
-
-def animate(i):
-    # Generate the x, y, and z coordinates for the Earth's orbit
-    x = np.cos(i)
-    y = np.sin(i)
-    z = 0
-
-    # Update the Earth's orbit
-    earth_orbit.set_data(x, y)
-    earth_orbit.set_3d_properties(z)
-
-
-anim = FuncAnimation(fig, animate, frames=np.linspace(0, 2 * np.pi, 120), interval=20)
-
-# Show the animation
-plt.show()
+    def run(self):
+        while True:
+            self.window.fill((255, 255, 255))
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+                    if event.key and event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+                    elif event.key:
+                        if event.key == pygame.KEYUP:
+                            pass
+                        if event.key == pygame.KEYDOWN:
+                            pass
+            ready = self.camera.query_image()
+            print(ready)
+            pygame.display.update()
