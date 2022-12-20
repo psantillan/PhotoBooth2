@@ -8,7 +8,7 @@ class PyGameCamera:
         pygame.camera.init()
         self.window = pygame.display.set_mode((700, 500), pygame.NOFRAME)
         self.camera = pygame.camera.Camera('/dev/media1')
-        self.cameras = [pygame.camera.Camera(x) for x in pygame.camera.list_cameras()]
+        self.cameras = [pygame.camera.Camera(x, (640, 360)) for x in pygame.camera.list_cameras()]
         print(pygame.camera.list_cameras())
         #self.camera.stop()
         #self.camera.start()
