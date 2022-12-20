@@ -31,6 +31,6 @@ class PyGameCamera:
                     camera.start()
                 except Exception as e:
                     print(e)
-            ready = self.camera.query_image()
-            print(f'img ready {ready}')
+                ready = self.camera.query_image()
+                print(f'img ready {ready}')
             pygame.display.update()
