@@ -21,9 +21,10 @@ class Camera:
         self.sensor_format = 'SRGGB10_CSI2P'
         self.output_size = (640, 360)
         self.current_frame = {
-            'data': BytesIO(),
+            'frame': BytesIO(),
             'size': self.output_size,
-            'format': 'RGBA'
+            'format': 'RGBA',
+            'data': lambda _: self.current_frame['frame'].read()
         }
         self.mode = {
             'video': self.camera.create_video_configuration(
@@ -38,7 +39,7 @@ class Camera:
         }
         self.setup_camera('video')
         self.camera.pre_callback = self.capture_pre_callback
-        self.ring_buffer_manager = CircularOutput(file=self.current_frame['data'], buffersize=1)
+        self.ring_buffer_manager = CircularOutput(file=self.current_frame['frame'], buffersize=1)
 
     def __enter__(self):
         #self.camera.start()
