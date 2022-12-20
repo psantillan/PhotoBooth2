@@ -27,7 +27,7 @@ class PyGameCamera:
                             pass
                         if event.key == pygame.KEYDOWN:
                             pass
-            for i in range(self.cameras):
+            for i in range(len(self.cameras)):
                 camera = self.cameras[i]
                 temp = None
                 try:
