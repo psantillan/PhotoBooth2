@@ -5,6 +5,7 @@ from UI import PhotoBoothUI
 
 class PyGameCamera:
     def __init__(self):
+        pygame.camera.init()
         self.window = pygame.display.set_mode((700, 500), pygame.NOFRAME)
         self.camera = pygame.camera.Camera('/dev/media1')
         self.camera.stop()
