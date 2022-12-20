@@ -9,7 +9,7 @@ class PyGameCamera:
         self.window = pygame.display.set_mode((700, 500), pygame.NOFRAME)
         self.camera = pygame.camera.Camera('/dev/media1')
         #self.camera.stop()
-        #self.camera.start()
+        self.camera.start()
 
     def run(self):
         while True:
