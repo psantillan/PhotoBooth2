@@ -7,6 +7,7 @@ class PyGameCamera:
     def __init__(self):
         self.window = pygame.display.set_mode((700, 500), pygame.NOFRAME)
         self.camera = pygame.camera.Camera('/dev/media1')
+        self.camera.stop()
         self.camera.start()
 
     def run(self):
@@ -23,5 +24,5 @@ class PyGameCamera:
                         if event.key == pygame.KEYDOWN:
                             pass
             ready = self.camera.query_image()
-            print(ready)
+            print(f'img ready {ready}')
             pygame.display.update()
