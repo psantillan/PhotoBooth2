@@ -1,5 +1,5 @@
 from picamera2 import Picamera2, MappedArray, Preview
-from picamera2.encoders import Encoder, H264Encoder
+from picamera2.encoders import Encoder, MJPEGEncoder
 from picamera2.outputs import CircularOutput
 from libcamera import controls
 from io import BytesIO
@@ -18,7 +18,7 @@ def print_length_and_return(arr):
 class Camera:
     def __init__(self, *args, **kwargs):
         self.camera = Picamera2()
-        self.encoder = Encoder()
+        self.encoder = MJPEGEncoder()
         self.ring_buffer = BytesIO()
         self.sensor_size = (1332, 990)
         self.sensor_format = 'SRGGB10_CSI2P'
