@@ -4,10 +4,12 @@ from Camera import Camera
 import os
 
 if __name__ == '__main__':
-    with Camera() as camera:
-        camera.camera.stop()
-        pgc = PyGameCamera()
-        pgc.run()
+    pgc = PyGameCamera()
+    pgc.run()
+    #with Camera() as camera:
+     #   camera.camera.stop()
+      #  pgc = PyGameCamera()
+      #  pgc.run()
         #while True:
          #   frame = camera.current_frame['frame'].read()
 
