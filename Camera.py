@@ -1,6 +1,8 @@
 from picamera2 import Picamera2, MappedArray, Preview
-from picamera2.encoders import Encoder
+from picamera2.encoders import Encoder, H264Encoder
+from picamera2.outputs import CircularOutput
 from libcamera import controls
+from io import BytesIO
 import time
 
 
@@ -13,6 +15,9 @@ class PyGameEncoder(Encoder):
 class Camera:
     def __init__(self, *args, **kwargs):
         self.camera = Picamera2()
+        self.encoder = Encoder()
+        self.ring_buffer = BytesIO()
+        self.ring_buffer_manager = CircularOutput(fileoutput=self.ring_buffer, buffer_size=1)
         self.sensor_size = (1332, 990)
         self.sensor_format = 'SRGGB10_CSI2P'
         self.output_size = (640, 360)
@@ -34,17 +39,18 @@ class Camera:
         }
         self.setup_camera('video')
         self.camera.pre_callback = self.capture_pre_callback
-        self.camera.start()
-        print('Waiting for 1 secnod to get camera defaults')
-        time.sleep(1)
-        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot, "AwbEnable": False, "AeEnable": False, 'FrameDurationLimits': (11111, 33333)})
-        current_control = self.camera.camera_controls
-        print(current_control)
 
     def __enter__(self):
+        #self.camera.start()
+        self.camera.start_recording(self.encoder, self.ring_buffer_manager)
+        print('Waiting for 1 second to get camera defaults')
+        time.sleep(1)
+        self.camera.set_controls({"AeMeteringMode": controls.AeMeteringModeEnum.Spot, "AwbEnable": False, "AeEnable": False, 'FrameDurationLimits': (11111, 33333)})
+        self.ring_buffer_manager.start()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        self.ring_buffer_manager.stop()
         self.camera.stop()
 
     def setup_camera(self, mode, **kwargs):
