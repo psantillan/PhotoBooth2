@@ -5,7 +5,7 @@ import os
 
 if __name__ == '__main__':
     with Camera() as camera:
-        camera.stop()
+        camera.camera.stop()
         pgc = PyGameCamera()
         pgc.run()
         #while True:
