@@ -29,7 +29,7 @@ class PyGameCamera:
                             pass
             for i in range(self.cameras):
                 camera = self.cameras[i]
-                temp =
+                temp = None
                 try:
                     camera.start()
                 except Exception as e:
