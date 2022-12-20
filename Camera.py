@@ -11,6 +11,9 @@ class PyGameEncoder(Encoder):
         super().__init__()
         self.surface = surface
 
+def print_length_and_return(arr):
+    print(len(arr))
+    return arr
 
 class Camera:
     def __init__(self, *args, **kwargs):
@@ -24,7 +27,7 @@ class Camera:
             'frame': BytesIO(),
             'size': self.output_size,
             'format': 'RGBA',
-            'data': lambda: self.current_frame['frame'].read()
+            'data': lambda: print_length_and_return(self.current_frame['frame'].read())
         }
         self.mode = {
             'video': self.camera.create_video_configuration(
